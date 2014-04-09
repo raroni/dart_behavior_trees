@@ -11,6 +11,6 @@ class Status {
   const Status._(this._value);
   
   String toString() {
-    return "${_value}";
+    return _value.toString();
   }
 }
