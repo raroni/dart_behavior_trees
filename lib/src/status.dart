@@ -9,4 +9,8 @@ class Status {
   final int _value;
 
   const Status._(this._value);
+  
+  String toString() {
+    return "${_value}";
+  }
 }
