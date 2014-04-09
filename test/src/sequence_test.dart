@@ -7,52 +7,42 @@ import '../mocks.dart';
 
 void main() {
   test("success", () {
-    var behavior1 = new BehaviorMock(Status.SUCCESS);
-    var behavior2 = new BehaviorMock(Status.SUCCESS);
-    var behavior3 = new BehaviorMock(Status.SUCCESS);
-    
-    var sequence = new Sequence(new BlackboardMock(), [behavior1, behavior2, behavior3]);
+    var sequence = new SequenceMock(3, Status.SUCCESS);
     var status = sequence.update();
     
     expect(status, equals(Status.SUCCESS));
-    expect(behavior1.statusCalls, equals(1));
-    expect(behavior2.statusCalls, equals(1));
-    expect(behavior3.statusCalls, equals(1));
+    expect(sequence[0].statusCalls, equals(1));
+    expect(sequence[1].statusCalls, equals(1));
+    expect(sequence[2].statusCalls, equals(1));
   });
   
   test("running", () {
-    var behavior1 = new BehaviorMock(Status.SUCCESS);
-    var behavior2 = new BehaviorMock(Status.SUCCESS);
-    var behavior3 = new BehaviorMock(Status.RUNNING);
-    var behavior4 = new BehaviorMock(Status.FAILURE);
-    
-    var sequence = new Sequence(new BlackboardMock(), [behavior1, behavior2, behavior3, behavior4]);
+    var sequence = new SequenceMock(4, Status.SUCCESS);
+    sequence[2].nextStatus = Status.RUNNING;
+    sequence[3].nextStatus = Status.FAILURE;
     var status = sequence.update();
     
     expect(status, equals(Status.RUNNING));
     expect(sequence.currentChildIndex, 2);
     
-    expect(behavior1.statusCalls, equals(1));
-    expect(behavior2.statusCalls, equals(1));
-    expect(behavior3.statusCalls, equals(1));
-    expect(behavior4.statusCalls, equals(0));
+    expect(sequence[0].statusCalls, equals(1));
+    expect(sequence[1].statusCalls, equals(1));
+    expect(sequence[2].statusCalls, equals(1));
+    expect(sequence[3].statusCalls, equals(0));
   });
   
   test("failure", () {
-    var behavior1 = new BehaviorMock(Status.SUCCESS);
-    var behavior2 = new BehaviorMock(Status.SUCCESS);
-    var behavior3 = new BehaviorMock(Status.FAILURE);
-    var behavior4 = new BehaviorMock(Status.SUCCESS);
-    
-    var sequence = new SequenceMock([behavior1, behavior2, behavior3, behavior4]);
+    var sequence = new SequenceMock(4, Status.SUCCESS);
+    sequence[2].nextStatus = Status.FAILURE;
+    sequence[3].nextStatus = Status.SUCCESS;
     var status = sequence.update();
     
     expect(status, equals(Status.FAILURE));
     expect(sequence.currentChildIndex, 2);
     
-    expect(behavior1.statusCalls, equals(1));
-    expect(behavior2.statusCalls, equals(1));
-    expect(behavior3.statusCalls, equals(1));
-    expect(behavior4.statusCalls, equals(0));
+    expect(sequence[0].statusCalls, equals(1));
+    expect(sequence[1].statusCalls, equals(1));
+    expect(sequence[2].statusCalls, equals(1));
+    expect(sequence[3].statusCalls, equals(0));
   });
 }
