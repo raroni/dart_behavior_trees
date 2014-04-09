@@ -1,10 +1,12 @@
-import 'package:behavior_trees/behavior_trees.dart';
+part of mocks;
 
-class DummyBehavior extends Behavior {
+class BehaviorMock extends Behavior {
   int initializeCalls = 0;
   int terminationCalls = 0;
   int updateCalls = 0;
   Status nextStatus;
+  
+  BehaviorMock(Status this.nextStatus);
   
   void onInitialization() {
     initializeCalls++;

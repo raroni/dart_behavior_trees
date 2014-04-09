@@ -3,19 +3,13 @@ library sequence_test;
 import 'package:unittest/unittest.dart';
 
 import 'package:behavior_trees/behavior_trees.dart';
-import './dummy_behavior.dart';
-
-Behavior createDummyBehavior(Status status) {
-  var behavior = new DummyBehavior();
-  behavior.nextStatus = status;
-  return behavior;
-}
+import '../mocks.dart';
 
 void main() {
   test("success", () {
-    var behavior1 = createDummyBehavior(Status.SUCCESS);
-    var behavior2 = createDummyBehavior(Status.SUCCESS);
-    var behavior3 = createDummyBehavior(Status.SUCCESS);
+    var behavior1 = new BehaviorMock(Status.SUCCESS);
+    var behavior2 = new BehaviorMock(Status.SUCCESS);
+    var behavior3 = new BehaviorMock(Status.SUCCESS);
     
     var sequence = new Sequence([behavior1, behavior2, behavior3]);
     var status = sequence.update();
@@ -27,10 +21,10 @@ void main() {
   });
   
   test("running", () {
-    var behavior1 = createDummyBehavior(Status.SUCCESS);
-    var behavior2 = createDummyBehavior(Status.SUCCESS);
-    var behavior3 = createDummyBehavior(Status.RUNNING);
-    var behavior4 = createDummyBehavior(Status.FAILURE);
+    var behavior1 = new BehaviorMock(Status.SUCCESS);
+    var behavior2 = new BehaviorMock(Status.SUCCESS);
+    var behavior3 = new BehaviorMock(Status.RUNNING);
+    var behavior4 = new BehaviorMock(Status.FAILURE);
     
     var sequence = new Sequence([behavior1, behavior2, behavior3, behavior4]);
     var status = sequence.update();
@@ -45,12 +39,12 @@ void main() {
   });
   
   test("failure", () {
-    var behavior1 = createDummyBehavior(Status.SUCCESS);
-    var behavior2 = createDummyBehavior(Status.SUCCESS);
-    var behavior3 = createDummyBehavior(Status.FAILURE);
-    var behavior4 = createDummyBehavior(Status.SUCCESS);
+    var behavior1 = new BehaviorMock(Status.SUCCESS);
+    var behavior2 = new BehaviorMock(Status.SUCCESS);
+    var behavior3 = new BehaviorMock(Status.FAILURE);
+    var behavior4 = new BehaviorMock(Status.SUCCESS);
     
-    var sequence = new Sequence([behavior1, behavior2, behavior3, behavior4]);
+    var sequence = new SequenceMock([behavior1, behavior2, behavior3, behavior4]);
     var status = sequence.update();
     
     expect(status, equals(Status.FAILURE));
