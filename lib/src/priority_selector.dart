@@ -1,10 +1,10 @@
 part of behavior_trees;
 
-class Selector extends Behavior {
+class PrioritySelector extends Behavior {
   List<Behavior> children;
   int currentChildIndex = 0;
   
-  Selector([List<Behavior> initialChildren]) {
+  PrioritySelector([List<Behavior> initialChildren]) {
     if(initialChildren == null) {
       children = new List<Behavior>();
     } else {
@@ -23,9 +23,9 @@ class Selector extends Behavior {
   Status getStatus() {
     while(true) {
       var child = children[currentChildIndex];
-      var childStatus = child.update();
+      var childStatus = child.getStatus();
       if(childStatus != Status.FAILURE) {
-        if(childStatus == Status.SUCCESS) reset();
+        reset();
         return childStatus;
       }
       currentChildIndex++;
