@@ -15,7 +15,7 @@ void main() {
     expect(behavior.status, equals(Status.FAILURE));
   });
   
-  test("onInitialize", () {
+  test("initialization", () {
     var behavior = new BehaviorMock(Status.RUNNING);
     expect(behavior.initializeCalls, equals(0));
     behavior.update();
@@ -24,7 +24,7 @@ void main() {
     expect(behavior.initializeCalls, equals(1));
   });
   
-  test("onInitialize", () {
+  test("termination", () {
     var behavior = new BehaviorMock(Status.RUNNING);
     expect(behavior.terminationCalls, equals(0));
     behavior.update();
