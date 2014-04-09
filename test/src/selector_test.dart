@@ -12,9 +12,9 @@ void main() {
     var status = selector.update();
     
     expect(status, equals(Status.RUNNING));
-    expect(selector[0].updateCalls, equals(1));
-    expect(selector[1].updateCalls, equals(1));
-    expect(selector[2].updateCalls, equals(0));
+    expect(selector[0].statusCalls, equals(1));
+    expect(selector[1].statusCalls, equals(1));
+    expect(selector[2].statusCalls, equals(0));
   });
   
   test("uses first success", () {
@@ -24,9 +24,9 @@ void main() {
     var status = selector.update();
     
     expect(status, equals(Status.SUCCESS));
-    expect(selector[0].updateCalls, equals(1));
-    expect(selector[1].updateCalls, equals(1));
-    expect(selector[2].updateCalls, equals(0));
+    expect(selector[0].statusCalls, equals(1));
+    expect(selector[1].statusCalls, equals(1));
+    expect(selector[2].statusCalls, equals(0));
   });
   
   test("it fails if all children fail", () {
@@ -34,9 +34,9 @@ void main() {
     var status = selector.update();
     
     expect(status, equals(Status.FAILURE));
-    expect(selector[0].updateCalls, equals(1));
-    expect(selector[1].updateCalls, equals(1));
-    expect(selector[2].updateCalls, equals(1));
+    expect(selector[0].statusCalls, equals(1));
+    expect(selector[1].statusCalls, equals(1));
+    expect(selector[2].statusCalls, equals(1));
   });
   
   test("it starts over when all children fail", () {
@@ -45,9 +45,9 @@ void main() {
     selector[0].nextStatus = Status.RUNNING;
     var status = selector.update();
     expect(status, equals(Status.RUNNING));
-    expect(selector[0].updateCalls, equals(2));
-    expect(selector[1].updateCalls, equals(1));
-    expect(selector[2].updateCalls, equals(1));
+    expect(selector[0].statusCalls, equals(2));
+    expect(selector[1].statusCalls, equals(1));
+    expect(selector[2].statusCalls, equals(1));
   });
   
   test("it starts over when a child succeeds", () {
@@ -55,9 +55,9 @@ void main() {
     selector[1].nextStatus = Status.SUCCESS;
     selector.update();
     var status = selector.update();
-    expect(selector[0].updateCalls, equals(2));
-    expect(selector[1].updateCalls, equals(2));
-    expect(selector[2].updateCalls, equals(0));
+    expect(selector[0].statusCalls, equals(2));
+    expect(selector[1].statusCalls, equals(2));
+    expect(selector[2].statusCalls, equals(0));
   });
   
   test("it starts over when a child is running", () {
@@ -65,8 +65,8 @@ void main() {
     selector[1].nextStatus = Status.RUNNING;
     selector.update();
     var status = selector.update();
-    expect(selector[0].updateCalls, equals(2));
-    expect(selector[1].updateCalls, equals(2));
-    expect(selector[2].updateCalls, equals(0));
+    expect(selector[0].statusCalls, equals(2));
+    expect(selector[1].statusCalls, equals(2));
+    expect(selector[2].statusCalls, equals(0));
   });
 }

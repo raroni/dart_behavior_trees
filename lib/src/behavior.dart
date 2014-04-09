@@ -5,12 +5,12 @@ abstract class Behavior {
   
   Status update() {
     if(status == Status.UNINITIALIZED) onInitialization();
-    status = onUpdate();
+    status = getStatus();
     if(status != Status.RUNNING) onTermination();
     return status;
   }
   
-  Status onUpdate();
+  Status getStatus();
   void onInitialization();
   void onTermination() { }
 }

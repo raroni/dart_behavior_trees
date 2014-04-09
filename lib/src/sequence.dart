@@ -10,7 +10,7 @@ class Sequence extends Behavior {
     currentChildIndex = 0;
   }
   
-  Status onUpdate() {
+  Status getStatus() {
     while(true) {
       var child = children[currentChildIndex];
       var result = child.update();

@@ -15,9 +15,9 @@ void main() {
     var status = sequence.update();
     
     expect(status, equals(Status.SUCCESS));
-    expect(behavior1.updateCalls, equals(1));
-    expect(behavior2.updateCalls, equals(1));
-    expect(behavior3.updateCalls, equals(1));
+    expect(behavior1.statusCalls, equals(1));
+    expect(behavior2.statusCalls, equals(1));
+    expect(behavior3.statusCalls, equals(1));
   });
   
   test("running", () {
@@ -32,10 +32,10 @@ void main() {
     expect(status, equals(Status.RUNNING));
     expect(sequence.currentChildIndex, 2);
     
-    expect(behavior1.updateCalls, equals(1));
-    expect(behavior2.updateCalls, equals(1));
-    expect(behavior3.updateCalls, equals(1));
-    expect(behavior4.updateCalls, equals(0));
+    expect(behavior1.statusCalls, equals(1));
+    expect(behavior2.statusCalls, equals(1));
+    expect(behavior3.statusCalls, equals(1));
+    expect(behavior4.statusCalls, equals(0));
   });
   
   test("failure", () {
@@ -50,9 +50,9 @@ void main() {
     expect(status, equals(Status.FAILURE));
     expect(sequence.currentChildIndex, 2);
     
-    expect(behavior1.updateCalls, equals(1));
-    expect(behavior2.updateCalls, equals(1));
-    expect(behavior3.updateCalls, equals(1));
-    expect(behavior4.updateCalls, equals(0));
+    expect(behavior1.statusCalls, equals(1));
+    expect(behavior2.statusCalls, equals(1));
+    expect(behavior3.statusCalls, equals(1));
+    expect(behavior4.statusCalls, equals(0));
   });
 }
