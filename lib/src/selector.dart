@@ -13,6 +13,10 @@ class Selector extends Behavior {
   }
   
   void onInitialization() {
+    reset();
+  }
+  
+  void reset() {
     currentChildIndex = 0;
   }
   
@@ -20,9 +24,15 @@ class Selector extends Behavior {
     while(true) {
       var child = children[currentChildIndex];
       var result = child.update();
-      if(result != Status.FAILURE) return result;
+      if(result != Status.FAILURE) {
+        reset();
+        return result;
+      }
       currentChildIndex++;
-      if(currentChildIndex == children.length) return Status.FAILURE;
+      if(currentChildIndex == children.length) {
+        reset();
+        return Status.FAILURE;
+      }
     }
   }
   
