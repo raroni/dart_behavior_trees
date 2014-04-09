@@ -11,7 +11,7 @@ void main() {
     var behavior2 = new BehaviorMock(Status.SUCCESS);
     var behavior3 = new BehaviorMock(Status.SUCCESS);
     
-    var sequence = new Sequence([behavior1, behavior2, behavior3]);
+    var sequence = new Sequence(new BlackboardMock(), [behavior1, behavior2, behavior3]);
     var status = sequence.update();
     
     expect(status, equals(Status.SUCCESS));
@@ -26,7 +26,7 @@ void main() {
     var behavior3 = new BehaviorMock(Status.RUNNING);
     var behavior4 = new BehaviorMock(Status.FAILURE);
     
-    var sequence = new Sequence([behavior1, behavior2, behavior3, behavior4]);
+    var sequence = new Sequence(new BlackboardMock(), [behavior1, behavior2, behavior3, behavior4]);
     var status = sequence.update();
     
     expect(status, equals(Status.RUNNING));

@@ -1,10 +1,10 @@
 part of behavior_trees;
 
-class Sequence extends Behavior {
+class Sequence<Blackboard> extends Behavior<Blackboard> {
   List<Behavior> children;
   int currentChildIndex = 0;
   
-  Sequence(List<Behavior> this.children);
+  Sequence(Blackboard blackboard, List<Behavior> this.children) : super(blackboard);
   
   void onInitialization() {
     currentChildIndex = 0;
