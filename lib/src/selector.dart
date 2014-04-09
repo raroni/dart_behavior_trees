@@ -25,7 +25,7 @@ class Selector extends Behavior {
       var child = children[currentChildIndex];
       var result = child.update();
       if(result != Status.FAILURE) {
-        reset();
+        if(result == Status.SUCCESS) reset();
         return result;
       }
       currentChildIndex++;

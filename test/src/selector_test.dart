@@ -60,12 +60,12 @@ void main() {
     expect(selector[2].statusCalls, equals(0));
   });
   
-  test("it starts over when a child is running", () {
+  test("it resumes a running child", () {
     var selector = new SelectorMock(3, Status.FAILURE);
     selector[1].nextStatus = Status.RUNNING;
     selector.update();
     var status = selector.update();
-    expect(selector[0].statusCalls, equals(2));
+    expect(selector[0].statusCalls, equals(1));
     expect(selector[1].statusCalls, equals(2));
     expect(selector[2].statusCalls, equals(0));
   });
