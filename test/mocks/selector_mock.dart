@@ -6,4 +6,8 @@ class SelectorMock extends Selector {
       children.add(new BehaviorMock(childrenStatus));
     }
   }
+  
+  Behavior operator[](int index) {
+    return children[index];    
+  }
 }

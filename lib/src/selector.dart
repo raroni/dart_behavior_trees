@@ -35,8 +35,4 @@ class Selector extends Behavior {
       }
     }
   }
-  
-  Behavior operator[](int index) {
-    return children[index];    
-  }
 }
