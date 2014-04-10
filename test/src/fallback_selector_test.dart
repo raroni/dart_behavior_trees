@@ -6,7 +6,7 @@ import '../mocks.dart';
 
 void main() {
   test("uses first running", () {
-    var selector = new SelectorMock(3, Status.FAILURE);
+    var selector = new FallbackSelectorMock(3, Status.FAILURE);
     selector[1].nextStatus = Status.RUNNING;
     
     var status = selector.update();
@@ -18,7 +18,7 @@ void main() {
   });
   
   test("uses first success", () {
-    var selector = new SelectorMock(3, Status.FAILURE);
+    var selector = new FallbackSelectorMock(3, Status.FAILURE);
     selector[1].nextStatus = Status.SUCCESS;
     
     var status = selector.update();
@@ -30,7 +30,7 @@ void main() {
   });
   
   test("it fails if all children fail", () {
-    var selector = new SelectorMock(3, Status.FAILURE);
+    var selector = new FallbackSelectorMock(3, Status.FAILURE);
     var status = selector.update();
     
     expect(status, equals(Status.FAILURE));
@@ -40,7 +40,7 @@ void main() {
   });
   
   test("it starts over when all children fail", () {
-    var selector = new SelectorMock(3, Status.FAILURE);
+    var selector = new FallbackSelectorMock(3, Status.FAILURE);
     selector.update();
     selector[0].nextStatus = Status.RUNNING;
     var status = selector.update();
@@ -51,7 +51,7 @@ void main() {
   });
   
   test("it starts over when a child succeeds", () {
-    var selector = new SelectorMock(3, Status.FAILURE);
+    var selector = new FallbackSelectorMock(3, Status.FAILURE);
     selector[1].nextStatus = Status.SUCCESS;
     selector.update();
     var status = selector.update();
@@ -61,7 +61,7 @@ void main() {
   });
   
   test("it resumes a running child", () {
-    var selector = new SelectorMock(3, Status.FAILURE);
+    var selector = new FallbackSelectorMock(3, Status.FAILURE);
     selector[1].nextStatus = Status.RUNNING;
     selector.update();
     var status = selector.update();
