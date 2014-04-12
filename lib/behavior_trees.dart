@@ -7,3 +7,4 @@ part 'src/fallback_selector.dart';
 part 'src/priority_selector.dart';
 part 'src/concurrent.dart';
 part 'src/branch.dart';
+part 'src/loop.dart';
