@@ -7,7 +7,7 @@ abstract class Behavior<Blackboard> {
   Behavior(Blackboard this.blackboard);
   
   Status update() {
-    if(status == Status.UNINITIALIZED) onInitialization();
+    if(status != Status.RUNNING) onInitialization();
     status = getStatus();
     if(status != Status.RUNNING) onTermination();
     return status;

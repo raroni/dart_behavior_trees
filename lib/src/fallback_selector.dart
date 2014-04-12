@@ -13,10 +13,6 @@ class FallbackSelector<Blackboard> extends Behavior<Blackboard> {
   }
   
   void onInitialization() {
-    rewind();
-  }
-  
-  void rewind() {
     currentChildIndex = 0;
   }
   
@@ -24,13 +20,9 @@ class FallbackSelector<Blackboard> extends Behavior<Blackboard> {
     while(true) {
       var child = children[currentChildIndex];
       var childStatus = child.update();
-      if(childStatus != Status.FAILURE) {
-        if(childStatus == Status.SUCCESS) rewind();
-        return childStatus;
-      }
+      if(childStatus != Status.FAILURE) return childStatus;
       currentChildIndex++;
       if(currentChildIndex == children.length) {
-        rewind();
         return Status.FAILURE;
       }
     }
