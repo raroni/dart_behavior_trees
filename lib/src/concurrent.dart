@@ -1,10 +1,10 @@
 part of behavior_trees;
 
-class Concurrent<Blackboard> extends Behavior<Blackboard> {
+class Concurrent<Subject> extends Behavior<Subject> {
   List<Behavior> children;
   int currentChildIndex;
   
-  Concurrent(Blackboard blackboard, [List<Behavior> initialChildren]) : super(blackboard) {
+  Concurrent(Subject subject, [List<Behavior> initialChildren]) : super(subject) {
     if(initialChildren == null) {
       children = new List<Behavior>();
     } else {

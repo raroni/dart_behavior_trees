@@ -1,10 +1,10 @@
 part of behavior_trees;
 
-abstract class Behavior<Blackboard> {
+abstract class Behavior<Subject> {
   Status status = Status.UNINITIALIZED;
-  Blackboard blackboard;
+  Subject subject;
   
-  Behavior(Blackboard this.blackboard);
+  Behavior(Subject this.subject);
   
   Status update() {
     if(status != Status.RUNNING) onInitialization();

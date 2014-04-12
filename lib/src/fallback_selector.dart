@@ -1,10 +1,10 @@
 part of behavior_trees;
 
-class FallbackSelector<Blackboard> extends Behavior<Blackboard> {
+class FallbackSelector<Subject> extends Behavior<Subject> {
   List<Behavior> children;
   int currentChildIndex;
   
-  FallbackSelector(Blackboard blackboard, [List<Behavior> initialChildren]) : super(blackboard) {
+  FallbackSelector(Subject subject, [List<Behavior> initialChildren]) : super(subject) {
     if(initialChildren == null) {
       children = new List<Behavior>();
     } else {

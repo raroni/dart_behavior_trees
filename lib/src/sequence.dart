@@ -1,10 +1,10 @@
 part of behavior_trees;
 
-class Sequence<Blackboard> extends Behavior<Blackboard> {
+class Sequence<Subject> extends Behavior<Subject> {
   List<Behavior> children;
   int currentChildIndex = 0;
   
-  Sequence(Blackboard blackboard, [List<Behavior> initialChildren]) : super(blackboard) {
+  Sequence(Subject subject, [List<Behavior> initialChildren]) : super(subject) {
     if(initialChildren == null) {
       children = new List<Behavior>();
     } else {

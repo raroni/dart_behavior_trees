@@ -1,7 +1,7 @@
 part of mocks;
 
 class FallbackSelectorMock extends FallbackSelector {
-  FallbackSelectorMock(num childrenCount, Status childrenStatus) : super(new BlackboardMock()) {
+  FallbackSelectorMock(num childrenCount, Status childrenStatus) : super(new SubjectMock()) {
     for(var i=0; childrenCount>i; i++) {
       children.add(new BehaviorMock(childrenStatus));
     }

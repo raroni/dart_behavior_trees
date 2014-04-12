@@ -1,11 +1,11 @@
 part of behavior_trees;
 
-class PrioritySelector<Blackboard> extends Behavior<Blackboard> {
+class PrioritySelector<Subject> extends Behavior<Subject> {
   List<Behavior> children;
   int currentChildIndex = 0;
   int lastChildIndex = 0;
   
-  PrioritySelector(Blackboard blackboard, [List<Behavior> initialChildren]) : super(blackboard) {
+  PrioritySelector(Subject subject, [List<Behavior> initialChildren]) : super(subject) {
     if(initialChildren == null) {
       children = new List<Behavior>();
     } else {
