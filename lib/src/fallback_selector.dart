@@ -1,16 +1,9 @@
 part of behavior_trees;
 
-class FallbackSelector<Subject> extends Behavior<Subject> {
-  List<Behavior> children;
+class FallbackSelector<Subject> extends Branch<Subject> {
   int currentChildIndex;
   
-  FallbackSelector(Subject subject, [List<Behavior> initialChildren]) : super(subject) {
-    if(initialChildren == null) {
-      children = new List<Behavior>();
-    } else {
-      children = initialChildren;
-    }
-  }
+  FallbackSelector(Subject subject) : super(subject);
   
   void onInitialization() {
     currentChildIndex = 0;

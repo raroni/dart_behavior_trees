@@ -6,3 +6,4 @@ part 'src/status.dart';
 part 'src/fallback_selector.dart';
 part 'src/priority_selector.dart';
 part 'src/concurrent.dart';
+part 'src/branch.dart';

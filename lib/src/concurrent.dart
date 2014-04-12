@@ -1,16 +1,9 @@
 part of behavior_trees;
 
-class Concurrent<Subject> extends Behavior<Subject> {
-  List<Behavior> children;
+class Concurrent<Subject> extends Branch<Subject> {
   int currentChildIndex;
   
-  Concurrent(Subject subject, [List<Behavior> initialChildren]) : super(subject) {
-    if(initialChildren == null) {
-      children = new List<Behavior>();
-    } else {
-      children = initialChildren;
-    }
-  }
+  Concurrent(Subject subject) : super(subject);
   
   void onInitialization() {
     currentChildIndex = 0;

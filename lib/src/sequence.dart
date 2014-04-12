@@ -1,16 +1,9 @@
 part of behavior_trees;
 
-class Sequence<Subject> extends Behavior<Subject> {
-  List<Behavior> children;
+class Sequence<Subject> extends Branch<Subject> {
   int currentChildIndex = 0;
   
-  Sequence(Subject subject, [List<Behavior> initialChildren]) : super(subject) {
-    if(initialChildren == null) {
-      children = new List<Behavior>();
-    } else {
-      children = initialChildren;
-    }
-  }
+  Sequence(Subject subject) : super(subject);
   
   void onInitialization() {
     currentChildIndex = 0;

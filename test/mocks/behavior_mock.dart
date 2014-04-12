@@ -6,7 +6,7 @@ class BehaviorMock extends Behavior<SubjectMock> {
   int statusCalls = 0;
   Status nextStatus;
   
-  BehaviorMock(Status this.nextStatus) : super(new SubjectMock());
+  BehaviorMock([Status this.nextStatus = Status.FAILURE]) : super(new SubjectMock());
   
   void onInitialization() {
     initializeCalls++;
