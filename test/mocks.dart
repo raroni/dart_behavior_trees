@@ -7,3 +7,4 @@ part 'mocks/sequence_mock.dart';
 part 'mocks/fallback_selector_mock.dart';
 part 'mocks/priority_selector_mock.dart';
 part 'mocks/blackboard_mock.dart';
+part 'mocks/concurrent_mock.dart';
