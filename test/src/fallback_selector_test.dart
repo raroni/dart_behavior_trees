@@ -29,7 +29,7 @@ void main() {
     expect(selector[2].statusCalls, equals(0));
   });
   
-  test("it fails if all children fail", () {
+  test("fails if all children fail", () {
     var selector = new FallbackSelectorMock(3, Status.FAILURE);
     var status = selector.update();
     
@@ -39,7 +39,7 @@ void main() {
     expect(selector[2].statusCalls, equals(1));
   });
   
-  test("it starts over when all children fail", () {
+  test("starts over when all children fail", () {
     var selector = new FallbackSelectorMock(3, Status.FAILURE);
     selector.update();
     selector[0].nextStatus = Status.RUNNING;

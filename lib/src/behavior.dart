@@ -13,7 +13,12 @@ abstract class Behavior<Blackboard> {
     return status;
   }
   
+  void reset() {
+    if(status == Status.RUNNING) onTermination();
+    status = Status.UNINITIALIZED;
+  }
+  
   Status getStatus();
-  void onInitialization();
+  void onInitialization() { }
   void onTermination() { }
 }

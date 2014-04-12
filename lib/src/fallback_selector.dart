@@ -2,7 +2,7 @@ part of behavior_trees;
 
 class FallbackSelector<Blackboard> extends Behavior<Blackboard> {
   List<Behavior> children;
-  int currentChildIndex = 0;
+  int currentChildIndex;
   
   FallbackSelector(Blackboard blackboard, [List<Behavior> initialChildren]) : super(blackboard) {
     if(initialChildren == null) {
@@ -13,10 +13,10 @@ class FallbackSelector<Blackboard> extends Behavior<Blackboard> {
   }
   
   void onInitialization() {
-    reset();
+    rewind();
   }
   
-  void reset() {
+  void rewind() {
     currentChildIndex = 0;
   }
   
@@ -25,12 +25,12 @@ class FallbackSelector<Blackboard> extends Behavior<Blackboard> {
       var child = children[currentChildIndex];
       var childStatus = child.update();
       if(childStatus != Status.FAILURE) {
-        if(childStatus == Status.SUCCESS) reset();
+        if(childStatus == Status.SUCCESS) rewind();
         return childStatus;
       }
       currentChildIndex++;
       if(currentChildIndex == children.length) {
-        reset();
+        rewind();
         return Status.FAILURE;
       }
     }

@@ -38,4 +38,20 @@ void main() {
     var result = selector.update();
     expect(result, equals(Status.FAILURE));
   });
+  
+  test("it resets children", () {
+    var selector = new PrioritySelectorMock(4, Status.FAILURE);
+    selector[3].nextStatus = Status.RUNNING;
+    
+    selector.update();
+    expect(selector[3].status, equals(Status.RUNNING));
+    
+    selector[1].nextStatus = Status.RUNNING;
+    selector.update();
+    
+    expect(selector[0].status, equals(Status.FAILURE));
+    expect(selector[1].status, equals(Status.RUNNING));
+    expect(selector[2].status, equals(Status.UNINITIALIZED));
+    expect(selector[3].status, equals(Status.UNINITIALIZED));
+  });
 }
