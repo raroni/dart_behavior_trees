@@ -4,12 +4,14 @@ import 'package:unittest/unittest.dart';
 import 'package:behavior_trees/behavior_trees.dart';
 import '../mocks.dart';
 
+var update = new UpdateMock();
+
 void main() {
   test("uses first running", () {
     var selector = new FallbackSelectorMock(3, Status.FAILURE);
     selector[1].nextStatus = Status.RUNNING;
     
-    var status = selector.update();
+    var status = selector.update(update);
     
     expect(status, equals(Status.RUNNING));
     expect(selector[0].statusCalls, equals(1));
@@ -21,7 +23,7 @@ void main() {
     var selector = new FallbackSelectorMock(3, Status.FAILURE);
     selector[1].nextStatus = Status.SUCCESS;
     
-    var status = selector.update();
+    var status = selector.update(update);
     
     expect(status, equals(Status.SUCCESS));
     expect(selector[0].statusCalls, equals(1));
@@ -31,7 +33,7 @@ void main() {
   
   test("fails if all children fail", () {
     var selector = new FallbackSelectorMock(3, Status.FAILURE);
-    var status = selector.update();
+    var status = selector.update(update);
     
     expect(status, equals(Status.FAILURE));
     expect(selector[0].statusCalls, equals(1));
@@ -41,9 +43,9 @@ void main() {
   
   test("starts over when all children fail", () {
     var selector = new FallbackSelectorMock(3, Status.FAILURE);
-    selector.update();
+    selector.update(update);
     selector[0].nextStatus = Status.RUNNING;
-    var status = selector.update();
+    var status = selector.update(update);
     expect(status, equals(Status.RUNNING));
     expect(selector[0].statusCalls, equals(2));
     expect(selector[1].statusCalls, equals(1));
@@ -53,8 +55,8 @@ void main() {
   test("it starts over when a child succeeds", () {
     var selector = new FallbackSelectorMock(3, Status.FAILURE);
     selector[1].nextStatus = Status.SUCCESS;
-    selector.update();
-    var status = selector.update();
+    selector.update(update);
+    var status = selector.update(update);
     expect(selector[0].statusCalls, equals(2));
     expect(selector[1].statusCalls, equals(2));
     expect(selector[2].statusCalls, equals(0));
@@ -63,8 +65,8 @@ void main() {
   test("it resumes a running child", () {
     var selector = new FallbackSelectorMock(3, Status.FAILURE);
     selector[1].nextStatus = Status.RUNNING;
-    selector.update();
-    var status = selector.update();
+    selector.update(update);
+    var status = selector.update(update);
     expect(selector[0].statusCalls, equals(1));
     expect(selector[1].statusCalls, equals(2));
     expect(selector[2].statusCalls, equals(0));

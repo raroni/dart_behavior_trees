@@ -10,3 +10,4 @@ part 'mocks/subject_mock.dart';
 part 'mocks/concurrent_mock.dart';
 part 'mocks/branch_mock.dart';
 part 'mocks/loop_mock.dart';
+part 'mocks/update_mock.dart';

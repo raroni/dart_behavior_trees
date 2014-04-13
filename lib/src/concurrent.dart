@@ -1,6 +1,6 @@
 part of behavior_trees;
 
-class Concurrent<Subject> extends Branch<Subject> {
+class Concurrent<Subject, Update> extends Branch<Subject, Update> {
   int currentChildIndex;
   
   Concurrent(Subject subject) : super(subject);
@@ -9,10 +9,10 @@ class Concurrent<Subject> extends Branch<Subject> {
     currentChildIndex = 0;
   }
   
-  Status getStatus() {
+  Status getStatus(Update update) {
     while(true) {
       var child = children[currentChildIndex];
-      var childStatus = child.update();
+      var childStatus = child.update(update);
       if(childStatus == Status.FAILURE) return Status.FAILURE;
       currentChildIndex++;
       if(currentChildIndex == children.length) {

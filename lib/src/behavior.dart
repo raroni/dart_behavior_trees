@@ -1,14 +1,14 @@
 part of behavior_trees;
 
-abstract class Behavior<Subject> {
+abstract class Behavior<Subject, Update> {
   Status status = Status.UNINITIALIZED;
   Subject subject;
   
   Behavior(Subject this.subject);
   
-  Status update() {
+  Status update(Update update) {
     if(status != Status.RUNNING) onInitialization();
-    status = getStatus();
+    status = getStatus(update);
     if(status != Status.RUNNING) onTermination();
     return status;
   }
@@ -18,7 +18,7 @@ abstract class Behavior<Subject> {
     status = Status.UNINITIALIZED;
   }
   
-  Status getStatus();
+  Status getStatus(Update update);
   void onInitialization() { }
   void onTermination() { }
 }

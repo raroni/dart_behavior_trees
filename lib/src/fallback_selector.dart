@@ -1,6 +1,6 @@
 part of behavior_trees;
 
-class FallbackSelector<Subject> extends Branch<Subject> {
+class FallbackSelector<Subject, Update> extends Branch<Subject, Update> {
   int currentChildIndex;
   
   FallbackSelector(Subject subject) : super(subject);
@@ -9,10 +9,10 @@ class FallbackSelector<Subject> extends Branch<Subject> {
     currentChildIndex = 0;
   }
   
-  Status getStatus() {
+  Status getStatus(Update update) {
     while(true) {
       var child = children[currentChildIndex];
-      var childStatus = child.update();
+      var childStatus = child.update(update);
       if(childStatus != Status.FAILURE) return childStatus;
       currentChildIndex++;
       if(currentChildIndex == children.length) {

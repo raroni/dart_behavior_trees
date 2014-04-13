@@ -1,9 +1,9 @@
 part of mocks;
 
-class BranchMock extends Branch<SubjectMock> {
+class BranchMock extends Branch<SubjectMock, UpdateMock> {
   BranchMock() : super(new SubjectMock());
   
-  Status getStatus() {
+  Status getStatus(UpdateMock update) {
     return Status.FAILURE;
   }
 }

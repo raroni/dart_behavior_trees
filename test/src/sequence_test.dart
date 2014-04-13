@@ -5,10 +5,12 @@ import 'package:unittest/unittest.dart';
 import 'package:behavior_trees/behavior_trees.dart';
 import '../mocks.dart';
 
+var update = new UpdateMock();
+
 void main() {
   test("success", () {
     var sequence = new SequenceMock(3, Status.SUCCESS);
-    var status = sequence.update();
+    var status = sequence.update(update);
     
     expect(status, equals(Status.SUCCESS));
     expect(sequence[0].statusCalls, equals(1));
@@ -20,7 +22,7 @@ void main() {
     var sequence = new SequenceMock(4, Status.SUCCESS);
     sequence[2].nextStatus = Status.RUNNING;
     sequence[3].nextStatus = Status.FAILURE;
-    var status = sequence.update();
+    var status = sequence.update(update);
     
     expect(status, equals(Status.RUNNING));
     expect(sequence.currentChildIndex, 2);
@@ -35,7 +37,7 @@ void main() {
     var sequence = new SequenceMock(4, Status.SUCCESS);
     sequence[2].nextStatus = Status.FAILURE;
     sequence[3].nextStatus = Status.SUCCESS;
-    var status = sequence.update();
+    var status = sequence.update(update);
     
     expect(status, equals(Status.FAILURE));
     expect(sequence.currentChildIndex, 2);

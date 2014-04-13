@@ -1,6 +1,6 @@
 part of mocks;
 
-class BehaviorMock extends Behavior<SubjectMock> {
+class BehaviorMock extends Behavior<SubjectMock, UpdateMock> {
   int initializeCalls = 0;
   int terminationCalls = 0;
   int statusCalls = 0;
@@ -12,7 +12,7 @@ class BehaviorMock extends Behavior<SubjectMock> {
     initializeCalls++;
   }
   
-  Status getStatus() {
+  Status getStatus(UpdateMock update) {
     statusCalls++;
     return nextStatus;
   }
