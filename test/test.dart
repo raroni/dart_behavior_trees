@@ -7,6 +7,7 @@ import 'src/branch_test.dart' as BranchTest;
 import 'src/fallback_selector_test.dart' as FallbackSelectorTest;
 import 'src/priority_selector_test.dart' as PrioritySelectorTest;
 import 'src/concurrent_test.dart' as ConcurrentTest;
+import 'src/cache_decorator_test.dart' as CacheDecoratorTest;
 
 main() {
   group('Behavior test', BehaviorTest.main);
@@ -16,4 +17,5 @@ main() {
   group('Fallback selector test', FallbackSelectorTest.main);
   group('Priority selector test', PrioritySelectorTest.main);
   group('Concurrent test', ConcurrentTest.main);
+  group('Cache decorator test', CacheDecoratorTest.main);
 }
