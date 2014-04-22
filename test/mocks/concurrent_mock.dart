@@ -7,7 +7,7 @@ class ConcurrentMock extends Concurrent {
     }
   }
   
-  Behavior operator[](int index) {
+  BehaviorMock operator[](int index) {
     return children[index];    
   }
 }
